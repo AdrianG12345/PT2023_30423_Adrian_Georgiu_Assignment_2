@@ -1,16 +1,31 @@
 package mvc;
 
-import mvc.models.Task;
+import mvc.controller.SimulationManager;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        int timeLimit = 60;
+
+        int minProcessingTime = 1;
+        int maxProcessingTime = 7;
+
+        int minArrivalTime = 2;
+        int maxArrivalTime = 40;
+
+        int numberOfServers = 5;
+
+        int numberOfClients = 50;
 
 
-        /*Task taskulMeu = new Task("Andrei");
 
-        taskulMeu.start();
 
-        taskulMeu.run(5);*/
+        SimulationManager simulation = new SimulationManager(timeLimit, minProcessingTime, maxProcessingTime, minArrivalTime, maxArrivalTime,
+                        numberOfServers,numberOfClients);
+        simulation.start();
+
+
+
 
     }
 }
