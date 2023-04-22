@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f53b716-8838-4b4b-bea2-ca41229e96fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/mvc/controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mvc/view/ViewFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/Scheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/Scheduler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/SimulationManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/SimulationManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/view/View.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mvc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mvc/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/Scheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mvc/controller/SimulationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/SimulationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mvc/models/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/models/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mvc/view/View.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test3.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +32,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="mvc.Main" />
@@ -80,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1682151843237</updated>
       <workItem from="1682151844950" duration="7732000" />
+      <workItem from="1682159975117" duration="128000" />
     </task>
     <servers />
   </component>

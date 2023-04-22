@@ -19,7 +19,7 @@ public class SimulationManager extends Thread{
     //ii THREAD
 
     private int timeLimit = 100;
-    private static final int waitTime = 1005;
+    private static final int waitTime = 1000;
     private ViewFrame view;
     private String output;
     private int maxServiceTime = 20;

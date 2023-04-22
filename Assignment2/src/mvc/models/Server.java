@@ -25,7 +25,7 @@ public class Server extends Thread{
     {
         this.lock = lock;
         this.name = name;
-        clients = new LinkedBlockingQueue<>();
+        clients = new LinkedList<>();
 
         this.maxSize = maxSize;
         remainingTime = 0;
@@ -41,7 +41,6 @@ public class Server extends Thread{
                 try {
                     Client clientCurrent = clients.peek();///head Element
                     int serviceTime = clientCurrent.getService();
-                    // System.out.println("Thread: " + name + " " + serviceTime);
 
                     for (int i = 0; i < serviceTime; i++)
                     {
