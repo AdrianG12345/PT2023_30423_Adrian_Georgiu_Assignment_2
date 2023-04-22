@@ -4,9 +4,6 @@ public class Client {
     private int arrival;
     private int service;
     private int id;
-
-
-
     public Client(int id, int serviceTime,int arrivalTime)
     {
         this.arrival = arrivalTime;

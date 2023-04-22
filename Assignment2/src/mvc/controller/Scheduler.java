@@ -19,27 +19,12 @@ public class Scheduler {
 
         for (int i = 0; i < nrQueues; i++)
         {
-            Server server = new Server( Integer.toString(i), maxNrInQueue, lock);
-            servers.add(server);
+            Server server = new Server( Integer.toString(i), maxNrInQueue, lock);///imi fac threadurile
+            servers.add(server);///le bag in lista
 
-            servers.get(i).start();
-
+            servers.get(i).start();///il pornesc
         }
-
     }
-
-
-//    public void addClient(Client client)
-//    {
-//        int poz = 0;
-//        int min = 10000000;
-//        for (int i = 0; i < servers.size(); i++)
-//        {
-//           // if (servers.get(i).)
-//        }
-//
-//    }
-
 
     public ArrayList<Server> getServers() {
         return servers;

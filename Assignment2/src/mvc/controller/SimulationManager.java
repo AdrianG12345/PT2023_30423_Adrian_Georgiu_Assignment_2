@@ -31,7 +31,6 @@ public class SimulationManager extends Thread{
     private int numberOfClients = 100;
     private int maxNrPeopleInQueue = 5;
     private int currentTime;
-
     private ArrayList<Client> clients;
 
     private BufferedWriter writer;
@@ -57,10 +56,10 @@ public class SimulationManager extends Thread{
         this.lock = new Object();
         this.output = new String();
         this.view = view;
-       // output = new String();
+
         clients = new ArrayList<>();
         currentTime = 0;
-        //currentTime.set(0);
+
         this.maxNrPeopleInQueue = maxNrPeopleInQueue;
         this.timeLimit = timeLimit;
 
@@ -73,10 +72,10 @@ public class SimulationManager extends Thread{
         this.numberOfServers = numberOfServers;
         this.numberOfClients = numberOfClients;
 
-        generateNClients(numberOfClients);
+        generateNClients(numberOfClients);///imi creez cei N clienti
         ///afisezNclients
 
-        scheduler = new Scheduler(numberOfServers, maxNrPeopleInQueue, lock);
+        scheduler = new Scheduler(numberOfServers, maxNrPeopleInQueue, lock);///imi creez Scheduler-ul
 
         try{
             File file = new File( "simulation.txt");
@@ -87,6 +86,7 @@ public class SimulationManager extends Thread{
             e.printStackTrace();
         }
 
+        ///imi afisez Clientii generati
         String string = new String();
         string += "Time simulation: " + timeLimit + " ; nr clients: " + numberOfClients;
         string += " ; nr servers: " + numberOfServers + "\n";
@@ -101,14 +101,6 @@ public class SimulationManager extends Thread{
             string += v.getId() + " " + v.getArrival() + " " + v.getService() + "\n";
         }
         scrieFile(string);
-
-//        try {
-//            writer.flush();
-//            writer.close();
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        }
-
     }
 
 
@@ -126,7 +118,7 @@ public class SimulationManager extends Thread{
     }
 
 
-    public void scrieFile(String string)
+    public void scrieFile(String string)///functie de scris in file
     {
         try {
             writer.write(string + "\n");
@@ -135,22 +127,16 @@ public class SimulationManager extends Thread{
             throw new RuntimeException(e);
         }
 
-        System.out.println(string);///in caz ca vreau si consola
+        // System.out.println(string);///in caz ca vreau si consola
     }
     public void run()
     {
-        while( currentTime <= timeLimit)
+        while( currentTime <= timeLimit)///cat timp mai am timp de simulat
         {
-            output = "";
-            output += "Time: " + currentTime + "\n";
-            scrieFile("Time: " + currentTime);
-            String string = new String();
-
-            output += "Waiting clients: ";
-            string += "Waiting clients: ";
+            ///adaug clientii in queues
             for (int i = 0; i < clients.size(); i++)///am erori daca nu fac asa
             {
-                if (currentTime >= clients.get(i).getArrival()) {
+                if (currentTime >= clients.get(i).getArrival()) {///daca au aparut in realitate
                     Server rezultat = scheduler.getServers().get(0);
                     for (Server obj : scheduler.getServers())///aleg dupa timpul ramas in queue minim
                     {
@@ -166,7 +152,15 @@ public class SimulationManager extends Thread{
                     }
                 }
             }
+            output = "";
+            output += "Time: " + currentTime + "\n";
+            scrieFile("Time: " + currentTime);
+            String string = new String();
 
+            output += "Waiting clients: ";
+            string += "Waiting clients: ";
+
+            ///afisez clientii care au ramas in asteptare
             ///daca au ramas in asteptare
             for (Client c : clients)
             {
@@ -176,6 +170,7 @@ public class SimulationManager extends Thread{
 
             string += "\n";
             output += "\n";
+            ///afisez clientii pe care ii am in queues
             for (int i = 0; i < numberOfServers; i++)
             {
                 output +=  "Queue: " + (i + 1) + " ";
@@ -205,17 +200,19 @@ public class SimulationManager extends Thread{
             view.setOutputTextArea(output);
             scrieFile(string);
 
-            try {
+            try {///astept o secunda pentru simulare reala
                 this.sleep(waitTime);
             }catch (InterruptedException e) {
                 System.out.println("ERROR SLEEPING 1 SECOND IN SIMULATION MANAGER");
                 throw new RuntimeException(e);
             }
+
+            ///le zic la thread-uri ca isi pot face treaba
+            ///safe mode ca sa fiu sigur ca nu sterg din ce afisez in timp ce afisez
             synchronized(lock)
             {
                 lock.notifyAll();
             }
-
             currentTime++;
         }
 
@@ -228,8 +225,8 @@ public class SimulationManager extends Thread{
         }
 
 
-        scheduler.stop();
-        interrupt();
+        scheduler.stop();///imi opresc thread-urile
+        interrupt();///opresc simulatorul
     }
 
 }

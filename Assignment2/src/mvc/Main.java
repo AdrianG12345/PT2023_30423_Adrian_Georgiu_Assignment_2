@@ -29,8 +29,5 @@ public class Main {
 
         ViewFrame view = new ViewFrame();
         Controller controller = new Controller(view);
-
-
-
     }
 }

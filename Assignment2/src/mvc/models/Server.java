@@ -1,5 +1,7 @@
 package mvc.models;
 
+import mvc.controller.SimulationManager;
+
 import java.sql.Array;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -42,16 +44,13 @@ public class Server extends Thread{
                 {
                     Client clientCurrent = clients.peek();///head Element
                     int serviceTime = clientCurrent.getService();
-
                     this.sleep(1000 * serviceTime);
-
                     remainingTime -= serviceTime;
-                    clients.poll();///scot headElement
                     synchronized (lock)
                     {
                         lock.wait();
                     }
-
+                    clients.poll();///scot headElement
                 }
                 catch (InterruptedException e) {
                     throw new RuntimeException(e);

@@ -15,7 +15,6 @@ public class Controller {
 
     class SimulateListener implements ActionListener
     {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             ///aici fac simulation manager
@@ -32,13 +31,10 @@ public class Controller {
             int numberOfClients = view.getNrClientsTextField();
 
             int maxNrPeopleInQueue = view.getMaxInQTextField();
-            System.out.println("S-a apasat buton");
+
             SimulationManager simulation = new SimulationManager(timeLimit, minServiceTime, maxServiceTime, minArrivalTime, maxArrivalTime,
                         numberOfServers,numberOfClients, maxNrPeopleInQueue, view);
             simulation.start();
-
-
-
 
         }
     }

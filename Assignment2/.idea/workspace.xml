@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f53b716-8838-4b4b-bea2-ca41229e96fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/SimulationManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/controller/SimulationManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment2/mvc/models/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation.txt" beforeDir="false" afterPath="$PROJECT_DIR$/simulation.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/controller/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/Scheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mvc/controller/SimulationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/controller/SimulationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mvc/models/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/models/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mvc/models/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mvc/models/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,19 +40,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/testareClona/PT2023_30423_Adrian_Georgiu_Assignment_2/Assignment2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/testareClona/PT2023_30423_Adrian_Georgiu_Assignment_2/Assignment2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="mvc.Main" />
