@@ -1,29 +1,34 @@
 package mvc;
 
-import mvc.controller.SimulationManager;
+import mvc.controller.Controller;
+import mvc.view.ViewFrame;
+
+import java.lang.constant.Constable;
 
 public class Main {
     public static void main(String[] args)
     {
-        int timeLimit = 60;
+//        int timeLimit = 200;
+//
+//        int minProcessingTime = 3;
+//        int maxProcessingTime = 9;
+//
+//        int minArrivalTime = 10;
+//        int maxArrivalTime = 100;
+//
+//        int numberOfServers = 20;
+//
+//        int numberOfClients = 1000;
+//
+//        int maxNrPeopleInQueue = 10;
 
-        int minProcessingTime = 1;
-        int maxProcessingTime = 7;
-
-        int minArrivalTime = 2;
-        int maxArrivalTime = 40;
-
-        int numberOfServers = 5;
-
-        int numberOfClients = 50;
-
-
-
-
+        /*
         SimulationManager simulation = new SimulationManager(timeLimit, minProcessingTime, maxProcessingTime, minArrivalTime, maxArrivalTime,
-                        numberOfServers,numberOfClients);
-        simulation.start();
+                        numberOfServers,numberOfClients, maxNrPeopleInQueue);
+        simulation.start();*/
 
+        ViewFrame view = new ViewFrame();
+        Controller controller = new Controller(view);
 
 
 

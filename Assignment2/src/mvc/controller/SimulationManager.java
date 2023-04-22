@@ -2,6 +2,7 @@ package mvc.controller;
 
 import mvc.models.Client;
 import mvc.models.Server;
+import mvc.view.ViewFrame;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,16 +12,24 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+
+
 public class SimulationManager extends Thread{
     //ii THREAD
 
     private int timeLimit = 100;
-    private int maxProcessingTime = 20;
-    private int minProcessingTime = 2;
+    private static final int waitTime = 1005;
+    private ViewFrame view;
+    private String output;
+    private int maxServiceTime = 20;
+    private AtomicInteger var;
+    private int minServiceTime = 2;
     private int minArrivalTime = 0;
     private int maxArrivalTime = 100;
     private int numberOfServers = 3;
     private int numberOfClients = 100;
+    private int maxNrPeopleInQueue = 5;
     private int currentTime;
 
     private ArrayList<Client> clients;
@@ -28,6 +37,7 @@ public class SimulationManager extends Thread{
     private BufferedWriter writer;
 
     private Scheduler scheduler;
+    private Object lock;
 
     ///aici am lista de clienti
     ///aici generez clientii
@@ -40,18 +50,22 @@ public class SimulationManager extends Thread{
 
 
 
-    public SimulationManager(int timeLimit, int minProcessingTime, int maxProcessingTime,
+    public SimulationManager(int timeLimit, int minServiceTime, int maxServiceTime,
                              int minArrivalTime, int maxArrivalTime,
-                            int numberOfServers, int numberOfClients)
+                            int numberOfServers, int numberOfClients, int maxNrPeopleInQueue, ViewFrame view)
     {
+        this.lock = new Object();
+        this.output = new String();
+        this.view = view;
+       // output = new String();
         clients = new ArrayList<>();
         currentTime = 0;
         //currentTime.set(0);
-
+        this.maxNrPeopleInQueue = maxNrPeopleInQueue;
         this.timeLimit = timeLimit;
 
-        this.minProcessingTime = minProcessingTime;
-        this.maxProcessingTime = maxProcessingTime;
+        this.minServiceTime = minServiceTime;
+        this.maxServiceTime = maxServiceTime;
 
         this.minArrivalTime = minArrivalTime;
         this.maxArrivalTime = maxArrivalTime;
@@ -62,12 +76,10 @@ public class SimulationManager extends Thread{
         generateNClients(numberOfClients);
         ///afisezNclients
 
-
-
-        scheduler = new Scheduler(numberOfServers);
+        scheduler = new Scheduler(numberOfServers, maxNrPeopleInQueue, lock);
 
         try{
-            File file = new File( "test.txt");
+            File file = new File( "simulation.txt");
 
             writer = new BufferedWriter(new FileWriter(file.getName()) );
         }
@@ -75,14 +87,20 @@ public class SimulationManager extends Thread{
             e.printStackTrace();
         }
 
-
         String string = new String();
+        string += "Time simulation: " + timeLimit + " ; nr clients: " + numberOfClients;
+        string += " ; nr servers: " + numberOfServers + "\n";
+        string += "Time min arrival: " + minArrivalTime + " ; time max arrival: " + maxArrivalTime + "\n";
+        string += "Time min service: " + minServiceTime + " ; time max service: " + maxServiceTime + "\n";
+        string += "Max number of people in a queue: " + maxNrPeopleInQueue + "\n";
+        scrieFile(string);
+
+        string = "Clients:\nId, Arrival Time, Service Time\n";
         for(Client v : clients)
         {
             string += v.getId() + " " + v.getArrival() + " " + v.getService() + "\n";
         }
         scrieFile(string);
-
 
 //        try {
 //            writer.flush();
@@ -97,10 +115,11 @@ public class SimulationManager extends Thread{
     public void generateNClients(int N)
     {
         Random rand = new Random();
+        int arrivalTime,serviceTime;
         for (int i = 0; i < N; i++)
         {
-            int arrivalTime = rand.nextInt(maxArrivalTime - minArrivalTime + 1) + minArrivalTime;
-            int serviceTime = rand.nextInt(maxProcessingTime - minProcessingTime + 1) + minProcessingTime;
+            arrivalTime = rand.nextInt(maxArrivalTime - minArrivalTime + 1) + minArrivalTime;
+            serviceTime = rand.nextInt(maxServiceTime - minServiceTime + 1) + minServiceTime;
 
             clients.add(new Client(i + 1, serviceTime, arrivalTime));
         }
@@ -120,22 +139,14 @@ public class SimulationManager extends Thread{
     }
     public void run()
     {
-        //scrieFile("Time: " + currentTime + "\n");
-
-        while( currentTime < timeLimit)
+        while( currentTime <= timeLimit)
         {
-
-            /*
-            maybe peak hour calculated here
-             */
-            ///adaug in queue clientii
-
-
-            scrieFile("Time: " + currentTime + "\n");
-
-            ///afisez tot ce am in queues;
+            output = "";
+            output += "Time: " + currentTime + "\n";
+            scrieFile("Time: " + currentTime);
             String string = new String();
 
+            output += "Waiting clients: ";
             string += "Waiting clients: ";
             for (int i = 0; i < clients.size(); i++)///am erori daca nu fac asa
             {
@@ -159,28 +170,15 @@ public class SimulationManager extends Thread{
             ///daca au ramas in asteptare
             for (Client c : clients)
             {
+                output += "(" + c.getId() + "," + c.getArrival() + "," + c.getService() + ") ";
                 string += "(" + c.getId() + "," + c.getArrival() + "," + c.getService() + ") ";
             }
 
-//            for (int i = 0; i < clients.size(); i++)
-//            {
-//                if (currentTime == clients.get(i).getArrival())
-//                {
-//                    ///il adaug in queue-ul liber
-//                    ///momentan queue 1
-//                    Server server = scheduler.getServers().get(0);
-//                    server.addClient(clients.get(i));
-//                    clients.remove(clients.get(i));
-//                }
-//                else
-//                {
-//                    string += "(" + clients.get(i).getId() + "," + clients.get(i).getArrival() + "," + clients.get(i).getService() + ")";
-//                }
-//            }
-
             string += "\n";
+            output += "\n";
             for (int i = 0; i < numberOfServers; i++)
             {
+                output +=  "Queue: " + (i + 1) + " ";
                 string += "Queue: " + (i + 1) + " ";
                 Server server = scheduler.getServers().get(i);
                 int size = server.getQueueSize();
@@ -188,29 +186,33 @@ public class SimulationManager extends Thread{
 
                 if (size == 0)
                 {
+                    output += "closed";
                     string += "closed";
                 }
                 else
                 {
                     for (Client v : server.getClients())
                     {
+                        output += "(" + v.getId() + "," + v.getArrival() + "," + v.getService() + ") ";
                         string += "(" + v.getId() + "," + v.getArrival() + "," + v.getService() + ") ";
                     }
                 }
+                output += "\n";
                 string += "\n";
             }
 
+
+            view.setOutputTextArea(output);
             scrieFile(string);
 
             try {
-                this.sleep(10);
+                this.sleep(waitTime);
             }catch (InterruptedException e) {
                 System.out.println("ERROR SLEEPING 1 SECOND IN SIMULATION MANAGER");
                 throw new RuntimeException(e);
             }
 
             currentTime++;
-            //System.out.println(currentTime);
         }
 
         ///inchid fisier

@@ -10,6 +10,9 @@ public class Server extends Thread{
     private volatile boolean running = true;
     private volatile int remainingTime;
     private Queue<Client> clients;
+    private boolean continueExecution;
+    private Object lock;
+    private int waiting = 1;
 
     private int maxSize;///max number of CLients in this queue;
 
@@ -18,12 +21,13 @@ public class Server extends Thread{
     ///la synchronized un singur thread are acces la un moment dat la acea secventa de cod
     //-> poate duce la deadlock
 
-    public Server(String name)
+    public Server(String name, int maxSize, Object lock)
     {
+        this.lock = lock;
         this.name = name;
-        clients = new LinkedList<>();
+        clients = new LinkedBlockingQueue<>();
 
-        maxSize = 10000;
+        this.maxSize = maxSize;
         remainingTime = 0;
 
 
@@ -41,11 +45,9 @@ public class Server extends Thread{
 
                     for (int i = 0; i < serviceTime; i++)
                     {
-                        this.sleep(10);
+                        this.sleep(1000);
                         remainingTime--;
                     }
-
-
                     clients.poll();///scot headElement
 
 
@@ -53,10 +55,6 @@ public class Server extends Thread{
                     throw new RuntimeException(e);
                 }
             }
-
-
-            // System.out.println("Thread " + name + " has finished!");
-
 
         }
     }

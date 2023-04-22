@@ -10,7 +10,7 @@ public class Scheduler {
     private ArrayList<Server> servers;
 
 
-    public Scheduler(int nrQueues)
+    public Scheduler(int nrQueues, int maxNrInQueue, Object lock)
     {
         ///creez queues
         //aici imi fac lista de queues
@@ -19,7 +19,7 @@ public class Scheduler {
 
         for (int i = 0; i < nrQueues; i++)
         {
-            Server server = new Server( Integer.toString(i) );
+            Server server = new Server( Integer.toString(i), maxNrInQueue, lock);
             servers.add(server);
 
             servers.get(i).start();
@@ -29,16 +29,16 @@ public class Scheduler {
     }
 
 
-    public void addClient(Client client)
-    {
-        int poz = 0;
-        int min = 10000000;
-        for (int i = 0; i < servers.size(); i++)
-        {
-           // if (servers.get(i).)
-        }
-
-    }
+//    public void addClient(Client client)
+//    {
+//        int poz = 0;
+//        int min = 10000000;
+//        for (int i = 0; i < servers.size(); i++)
+//        {
+//           // if (servers.get(i).)
+//        }
+//
+//    }
 
 
     public ArrayList<Server> getServers() {
