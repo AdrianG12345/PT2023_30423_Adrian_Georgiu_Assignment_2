@@ -211,6 +211,10 @@ public class SimulationManager extends Thread{
                 System.out.println("ERROR SLEEPING 1 SECOND IN SIMULATION MANAGER");
                 throw new RuntimeException(e);
             }
+            synchronized(lock)
+            {
+                lock.notifyAll();
+            }
 
             currentTime++;
         }

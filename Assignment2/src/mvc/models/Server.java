@@ -30,27 +30,30 @@ public class Server extends Thread{
         this.maxSize = maxSize;
         remainingTime = 0;
 
-
     }
 
 
     public void run() {
         while (running)///poate trebuie sa schimb
         {
-            if (clients.size() > 0) {
-                try {
+            if (clients.size() > 0)
+            {
+                try
+                {
                     Client clientCurrent = clients.peek();///head Element
                     int serviceTime = clientCurrent.getService();
 
-                    for (int i = 0; i < serviceTime; i++)
-                    {
-                        this.sleep(1000);
-                        remainingTime--;
-                    }
+                    this.sleep(1000 * serviceTime);
+
+                    remainingTime -= serviceTime;
                     clients.poll();///scot headElement
+                    synchronized (lock)
+                    {
+                        lock.wait();
+                    }
 
-
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -60,7 +63,8 @@ public class Server extends Thread{
 
     public int addClient(Client client)
     {
-        if (clients.size() < maxSize) {
+        if (clients.size() < maxSize)
+        {
             clients.add(client);
             remainingTime += client.getService();
             return 1;
